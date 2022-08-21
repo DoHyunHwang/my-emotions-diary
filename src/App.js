@@ -5,6 +5,7 @@ import Edit from "./pages/Edit";
 import New from "./pages/New";
 import Diary from "./pages/Diary";
 import React, { useReducer, useRef } from "react";
+// import ReactPlayer from "react-player";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -13,7 +14,7 @@ const reducer = (state, action) => {
       return action.data;
     }
     case "CREATE": {
-      newState = [...action.data, ...state];
+      newState = [{ ...action.data }, ...state];
       break;
     }
     case "REMOVE": {
@@ -38,33 +39,33 @@ export const DiaryDispatchContext = React.createContext();
 const dummyData = [
   {
     id: 1,
-    emotion: 1,
-    content: "오늘의 일기 1번",
     date: 1660455977852,
+    content: "오늘의 일기 1번",
+    emotion: 1,
   },
   {
     id: 2,
-    emotion: 2,
-    content: "오늘의 일기 2번",
     date: 1660455977853,
+    content: "오늘의 일기 2번",
+    emotion: 2,
   },
   {
     id: 3,
-    emotion: 3,
-    content: "오늘의 일기 3번",
     date: 1660455977854,
+    content: "오늘의 일기 3번",
+    emotion: 3,
   },
   {
     id: 4,
-    emotion: 4,
-    content: "오늘의 일기 4번",
     date: 1660455977855,
+    content: "오늘의 일기 4번",
+    emotion: 4,
   },
   {
     id: 5,
-    emotion: 5,
-    content: "오늘의 일기 5번",
     date: 1660455977856,
+    content: "오늘의 일기 5번",
+    emotion: 5,
   },
 ];
 
@@ -93,12 +94,14 @@ function App() {
   const onEdit = (tartgetId, date, content, emotion) => {
     dispatch({
       type: "EDIT",
-      data: {
-        id: tartgetId,
-        date: new Date(date).getTime(),
-        content,
-        emotion,
-      },
+      data: [
+        {
+          id: tartgetId,
+          date: new Date(date).getTime(),
+          content,
+          emotion,
+        },
+      ],
     });
   };
 
@@ -106,6 +109,13 @@ function App() {
     <DiaryStateContext.Provider value={data}>
       <DiaryDispatchContext.Provider value={{ onCreate, onRemove, onEdit }}>
         <BrowserRouter>
+          {/* <ReactPlayer
+            className="react-player"
+            url={"https://youtu.be/KhQDNJYdtIo"}
+            width={400}
+            playing
+            controls
+          /> */}
           <div className="App">
             <Routes>
               <Route path="/" element={<Home />}></Route>
