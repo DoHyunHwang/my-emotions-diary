@@ -8,6 +8,11 @@ const Edit = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName("title")[0];
+    titleElement.innerHTML = `감정 일기장 - ${id}번 일기 수정`;
+  }, []);
+
   const diaryList = useContext(DiaryStateContext);
 
   useEffect(() => {
